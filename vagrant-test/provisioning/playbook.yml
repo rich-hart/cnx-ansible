@@ -1,0 +1,12 @@
+
+---
+- hosts: all
+  remote_user: vagrant
+  sudo: yes
+  tasks:
+  - name: run apt-get update
+    apt: update_cache=yes    
+#  - name: ansible vagrant integration test
+#    shell: echo "ANSIBLE IS WORKING!!!"
+
+
