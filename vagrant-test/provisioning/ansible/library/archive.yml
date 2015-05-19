@@ -1,0 +1,18 @@
+---
+# archive.yml
+- hosts: all
+  remote_user: vagrant
+  sudo: yes
+
+  tasks:
+  - name: get travis variables 
+    include_vars: travis.yml
+  - name: before script
+    shell: "{{before_install[0]}}"
+  - name: test echo
+    command: echo "testing echo command"
+  #- name: setup
+  #  command: = {before_install}
+
+  #- name: placeholder bar
+  #  command: /bin/bar
