@@ -1,6 +1,0 @@
-  
-  postgresql_user:
-  # Set up postgres roles
-  - sudo -u postgres psql -d postgres -c "CREATE USER cnxarchive WITH SUPERUSER PASSWORD 'cnxarchive';"
-  # Set up the database
-  - sudo -u postgres createdb -O cnxarchive cnxarchive-testing
