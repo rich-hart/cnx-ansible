@@ -5,7 +5,9 @@
   sudo: yes
 
   tasks:
-  - include: before_install.yml
+#  - include: before_install.yml
+#  - include: install.yml
+  - include: before_script.yml
 #  - name: get travis variables 
 #    include_vars: travis.yml
 #  - name: single before script command
