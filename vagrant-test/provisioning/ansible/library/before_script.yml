@@ -6,4 +6,7 @@
   sudo: yes
   sudo_user: postgres
   postgresql_db: name=cnxarchive-testing owner=cnxarchive #login_host=default
-
+#- name:  Adds tsearch2 to the database cnxarchive-testing
+#  sudo: yes
+#  sudo_user: postgres
+#  postgresql_ext: name=tsearch2 db=cnxarchive-testing

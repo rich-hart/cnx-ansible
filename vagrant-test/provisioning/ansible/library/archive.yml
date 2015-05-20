@@ -4,10 +4,15 @@
   remote_user: vagrant
   sudo: yes
 
+  handlers:
+    - name: restart memcached
+      service: name=memcached state=restarted
+
   tasks:
-#  - include: before_install.yml
-#  - include: install.yml
-  - include: before_script.yml
+    - include: before_install.yml
+    - include: install.yml
+    - include: before_script.yml
+    - include: script.yml
 #  - name: get travis variables 
 #    include_vars: travis.yml
 #  - name: single before script command
