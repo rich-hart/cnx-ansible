@@ -1,0 +1,93 @@
+- name: update apt-get
+  apt: update_cache=yes
+#- name:  Install the package git
+#  apt: name=git state=present
+
+- name:  Install packages
+  apt: name={{item}} state=present
+  with_items:
+     - pkg-config
+     - git
+     - postgresql-plpython-9.3
+     - libxml2-dev
+     - libxslt-dev 
+     - postgresql-server-dev-9.3
+     - python-pip
+     - python-dev
+
+- name: Update all packages to the latest version
+  apt: upgrade=dist
+
+- name: Clone https://github.com/petere/plxslt.git repo
+  git: repo=https://github.com/petere/plxslt.git dest=/home/vagrant/plxslt
+- name: Setup plxslt
+  shell:  make chdir=/home/vagrant/plxslt
+- name: Install plxslt
+  shell: make install chdir=/home/vagrant/plxslt 
+
+- name:  Clone git repos
+  git: repo=https://github.com/{{item.remote}}/{{item.repo}}.git dest=/home/vagrant/{{item.repo}} version={{item.branch}}
+  with_items:
+#     - { remote: petere, repo: plxslt ,branch: master }
+     - { remote: Connexions, repo: cnx-query-grammar ,branch: master }
+     - { remote: Connexions, repo: cnx-epub ,branch: master }
+     - { remote: Connexions, repo: rhaptos.cnxmlutils ,branch: master }
+     - { remote: Connexions, repo: plpydbapi ,branch: bug-fixes }
+- name: Install python modules
+  pip: name=./ extra_args='-e' chdir=/home/vagrant/{{item.repo}}
+  with_items:
+#     - { remote: petere, repo: plxslt ,branch: master }
+     - { remote: Connexions, repo: cnx-query-grammar ,branch: master }
+     - { remote: Connexions, repo: cnx-epub ,branch: master }
+     - { remote: Connexions, repo: rhaptos.cnxmlutils ,branch: master }
+     - { remote: Connexions, repo: plpydbapi ,branch: bug-fixes }
+ 
+    # - https://github.com/petere/plxslt.git
+    # - https://github.com/Connexions/cnx-query-grammar.git
+    # - https://github.com/Connexions/cnx-epub.git
+    # - https://github.com/Connexions/rhaptos.cnxmlutils.git
+    # - https://github.com/Connexions/plpydbapi.git
+
+
+#- name: install packages
+#  apt: name={{item}} state=present
+#  with_item:
+#      - git
+#      - postgresql-plpython-9.3
+
+#  package_list:
+#    - git
+#    - postgresql-plpython-9.3
+#    - libxml2-dev
+#    - libxslt-dev
+#    - postgresql-server-dev-9.3
+#    - python-pip
+#  apt:  name={item} state=present
+#  with_items: package_list 
+#before_install:
+#  - sudo apt-get -y update
+#  - sudo apt-get -y install git
+#  # Install the 'plpython' extension language
+#  - sudo apt-get -y install postgresql-plpython-9.3
+#  # Install the 'plxslt' extension language
+#  - sudo apt-get -y install libxml2-dev libxslt-dev postgresql-server-dev-9.3
+#  - git clone https://github.com/petere/plxslt.git
+#  - cd plxslt && sudo make && sudo make install && cd ..
+#  # Install cnx-query-grammar
+#  - git clone https://github.com/Connexions/cnx-query-grammar.git
+#  - cd cnx-query-grammar && sudo /usr/bin/python setup.py install && cd ..
+#  # Install cnx-epub
+#  - git clone https://github.com/Connexions/cnx-epub.git
+#  - cd cnx-epub && sudo /usr/bin/python setup.py install && cd ..
+#  # Install rhaptos.cnxmlutils
+#  - git clone https://github.com/Connexions/rhaptos.cnxmlutils.git
+#  - cd rhaptos.cnxmlutils && sudo /usr/bin/python setup.py install && cd ..
+#  # Install bug-fixes branch of plpydbapi
+#  - git clone -b bug-fixes https://github.com/Connexions/plpydbapi.git
+#  - cd plpydbapi && sudo /usr/bin/python setup.py install && cd ..
+#  # Install the coverage utility and coveralls reporting utility
+#  - sudo apt-get -y install python-pip
+#  # Scripts get installed to /usr/local/bin
+#  - sudo /usr/bin/pip install coverage
+#  - sudo /usr/bin/pip install coveralls
+#

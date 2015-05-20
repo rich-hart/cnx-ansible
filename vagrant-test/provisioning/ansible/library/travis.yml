@@ -8,11 +8,12 @@ addons:
 services:
   - memcached
 before_install:
-  - sudo apt-get update
+  - sudo apt-get -y update
+  - sudo apt-get -y install git
   # Install the 'plpython' extension language
-  - sudo apt-get install postgresql-plpython-9.3
+  - sudo apt-get -y install postgresql-plpython-9.3
   # Install the 'plxslt' extension language
-  - sudo apt-get install libxml2-dev libxslt-dev postgresql-server-dev-9.3
+  - sudo apt-get -y install libxml2-dev libxslt-dev postgresql-server-dev-9.3
   - git clone https://github.com/petere/plxslt.git
   - cd plxslt && sudo make && sudo make install && cd ..
   # Install cnx-query-grammar
@@ -28,7 +29,7 @@ before_install:
   - git clone -b bug-fixes https://github.com/Connexions/plpydbapi.git
   - cd plpydbapi && sudo /usr/bin/python setup.py install && cd ..
   # Install the coverage utility and coveralls reporting utility
-  - sudo apt-get install python-pip
+  - sudo apt-get -y install python-pip
   # Scripts get installed to /usr/local/bin
   - sudo /usr/bin/pip install coverage
   - sudo /usr/bin/pip install coveralls

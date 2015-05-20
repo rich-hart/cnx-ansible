@@ -5,12 +5,14 @@
   sudo: yes
 
   tasks:
-  - name: get travis variables 
-    include_vars: travis.yml
-  - name: before script
-    shell: "{{before_install[0]}}"
-  - name: test echo
-    command: echo "testing echo command"
+  - include: before_install.yml
+#  - name: get travis variables 
+#    include_vars: travis.yml
+#  - name: single before script command
+#    shell: "{{before_install[0]}}"
+#  - name: all before script commands
+#    shell: "{{item}}"
+#    with_items: before_install
   #- name: setup
   #  command: = {before_install}
 
