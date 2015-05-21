@@ -4,10 +4,24 @@
 # Note this is SUPER short, because it’s just including some other playbooks. 
 # Remember, playbooks are nothing more than lists of plays:
 
----
+#---
 #  file: site.yml
 #- include: startup.yml
-- include: library/archive.yml
+---
+# archive.yml
+- hosts: all
+  remote_user: vagrant
+  sudo: yes
+
+  handlers:
+    - name: restart memcached
+      service: name=memcached state=restarted
+
+  tasks:
+    #- include: library/setup.yml
+    #- include: library/plxslt.yml
+    - include: library/install_modules.yml
+#    - include: library/archive.yml
 
 #- include: webservers.yml
 #- include: dbservers.yml

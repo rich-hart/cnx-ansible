@@ -1,0 +1,23 @@
+- name: get modules list
+  include_vars: library/python_modules.yml
+- name: clone python repos
+  git: repo=https://github.com/{{item.remote}}/{{item.repo}}.git dest=/home/vagrant/{{item.repo}} version={{item.branch}}
+#  include_vars: python_modules.yml
+  with_items: modules
+- name: install python modules
+  pip: name=./ extra_args='-e' chdir=/home/vagrant/{{item.repo}}
+  with_items: modules
+  #- { remote: Connexions, repo: cnx-query-grammar ,branch: master }
+#    - { remote: Connexions, repo: cnx-epub ,branch: master }
+#    - { remote: Connexions, repo: rhaptos.cnxmlutils ,branch: master }
+#    - { remote: Connexions, repo: plpydbapi ,branch: bug-fixes }
+
+#- name: test
+#  shell: echo "hi"
+#- name: clone module
+#  git: repo=https://github.com/{{item.remote}}/{{item.repo}}.git dest=/home/vagrant/{{item.repo}} version={{item.branch}}
+#  with_items:
+#    - { remote: Connexions, repo: cnx-query-grammar ,branch: master }
+#    - { remote: Connexions, repo: cnx-epub ,branch: master }
+#    - { remote: Connexions, repo: rhaptos.cnxmlutils ,branch: master }
+#    - { remote: Connexions, repo: plpydbapi ,branch: bug-fixes }

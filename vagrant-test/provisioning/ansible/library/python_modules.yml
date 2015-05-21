@@ -1,0 +1,5 @@
+modules:
+- { remote: Connexions, repo: cnx-query-grammar ,branch: master }
+- { remote: Connexions, repo: cnx-epub ,branch: master }
+- { remote: Connexions, repo: rhaptos.cnxmlutils ,branch: master }
+- { remote: Connexions, repo: plpydbapi ,branch: bug-fixes }
