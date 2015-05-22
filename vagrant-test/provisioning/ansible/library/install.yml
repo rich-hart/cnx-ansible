@@ -1,6 +1,0 @@
-- name: Clone cnx-archive 
-  git: repo=https://github.com/Connexions/cnx-archive.git dest=/home/vagrant/cnx-archive
-- name: Install cnx-archive
-  pip: name=./ extra_args='-e' chdir=/home/vagrant/cnx-archive
-
-

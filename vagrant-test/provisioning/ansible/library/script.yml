@@ -1,4 +1,0 @@
-- name: run tests
-  shell: python setup.py test chdir=/home/vagrant/cnx-archive
-  notify:
-     - restart memcached
