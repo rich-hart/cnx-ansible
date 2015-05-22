@@ -1,5 +1,3 @@
-- name: get modules list
-  include_vars: library/python_modules.yml
 - name: clone python repos
   git: repo=https://github.com/{{item.remote}}/{{item.repo}}.git dest=/home/vagrant/{{item.repo}} version={{item.branch}}
 #  include_vars: python_modules.yml
