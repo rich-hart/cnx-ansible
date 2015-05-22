@@ -15,4 +15,8 @@
      - memcached
 - name: Update all packages to the latest version
   apt: upgrade=dist
+- name: remove requests from pip #authoring resolves intercept error when running tests
+  shell: pip uninstall -y requests
+- name: install requests from apt-get # this can prob be removed 
+  apt: name=python-requests state=present
 

@@ -20,7 +20,10 @@
   sudo: yes
   sudo_user: postgres
   shell: dropdb --if-exists cnxarchive
-
+- name: drop archive
+  sudo: yes
+  sudo_user: postgres
+  shell: dropdb --if-exists cnxarchive-testing
 - name: Set up archive testing database
   sudo: yes
   sudo_user: postgres
@@ -53,9 +56,10 @@
 
 # init db
 - name: initialize archive
-  shell: cnx-archive-initdb --with-example-data development.ini chdir=/home/vagrant/cnx-archive
-- name: make development script for  authoring
-  shell: cp development.ini.example development.ini chdir=/home/vagrant/cnx-authoring
+#  shell: cnx-archive-initdb --with-example-data development.ini chdir=/home/vagrant/cnx-archive
+  shell: cnx-archive-initdb --with-example-data cnxarchive/tests/testing.ini chdir=/home/vagrant/cnx-archive
+#- name: make development script for  authoring
+#  shell: cp development.ini.example development.ini chdir=/home/vagrant/cnx-authoring
 - name: initialize authoring
   sudo: yes
   sudo_user: postgres
@@ -68,11 +72,21 @@
   notify:
      - restart memcached
 
-#- name: run authoring tests
-#  shell: python setup.py test chdir=/home/vagrant/cnx-authoring
+- name: run authoring tests
+  shell: python setup.py test chdir=/home/vagrant/cnx-authoring
+
+- name: drop archive
+  sudo: yes
+  sudo_user: postgres
+  shell: dropdb --if-exists cnxarchive-testing
+- name: Set up archive testing database
+  sudo: yes
+  sudo_user: postgres
+  postgresql_db: name=cnxarchive-testing owner=cnxarchive #login_host=default
 
 # test publishing
-
+#- name: init publish db
+#  shell: cnx-publishing-initdb testing.ini chdir=/home/vagrant/cnx-publishing
 - name: run publishing tests
   shell: python setup.py test chdir=/home/vagrant/cnx-publishing
 
