@@ -1,14 +1,23 @@
-# http://docs.ansible.com/playbooks_best_practices.html#top-level-playbooks-are-separated-by-role
-
-# In site.yml, we include a playbook that defines our entire infrastructure. 
-# Note this is SUPER short, because it’s just including some other playbooks. 
-# Remember, playbooks are nothing more than lists of plays:
-
 ---
-#  file: site.yml
-#- include: startup.yml
-- include: library/archive.yml
+- hosts: all
+  remote_user: vagrant
+  sudo: yes
+  vars:
+    modules:
+    - { remote: Connexions, repo: cnx-query-grammar, branch: master }
+    - { remote: Connexions, repo: cnx-epub, branch: master }
+    - { remote: Connexions, repo: rhaptos.cnxmlutils, branch: master }
+    - { remote: Connexions, repo: plpydbapi, branch: bug-fixes }
+    - { remote: Connexions, repo: cnx-archive, branch: master }
+    - { remote: Connexions, repo: cnx-authoring, branch: master }
+    - { remote: Connexions, repo: cnx-publishing, branch: master }
+  handlers:
+    - name: restart memcached
+      service: name=memcached state=restarted
 
-#- include: webservers.yml
-#- include: dbservers.yml
+  tasks:
+    - include: library/setup.yml
+    - include: library/plxslt.yml
+    - include: library/install_modules.yml
+    - include: library/test_modules.yml
 
