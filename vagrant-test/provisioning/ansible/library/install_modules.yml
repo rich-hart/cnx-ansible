@@ -1,7 +1,0 @@
-- name: clone python repos
-  git: repo=https://github.com/{{item.remote}}/{{item.repo}}.git dest=/home/vagrant/{{item.repo}} version={{item.branch}}
-  with_items: modules
-- name: install python modules
-  pip: name=./ extra_args='-e' chdir=/home/vagrant/{{item.repo}}
-  with_items: modules
-
