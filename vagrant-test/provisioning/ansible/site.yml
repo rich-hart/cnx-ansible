@@ -16,7 +16,7 @@
       service: name=memcached state=restarted
 
   tasks:
-    - include: library/setup.yml
+    - include: setup.yml
 #    - include: library/plxslt.yml
 #    - include: library/install_modules.yml
 #    - include: library/test_modules.yml
