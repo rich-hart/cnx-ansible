@@ -11,12 +11,15 @@
     - { remote: Connexions, repo: cnx-archive, branch: master }
     - { remote: Connexions, repo: cnx-publishing, branch: master }
     - { remote: Connexions, repo: cnx-authoring, branch: master }
+    deploy_dir: /home/vagrant
   handlers:
     - name: restart memcached
       service: name=memcached state=restarted
 
   tasks:
     - include: setup.yml
+    - include: python_modules.yml
+    - include: test_modules.yml 
 #    - include: library/plxslt.yml
 #    - include: library/install_modules.yml
 #    - include: library/test_modules.yml
