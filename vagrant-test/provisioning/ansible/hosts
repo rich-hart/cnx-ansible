@@ -1,0 +1,26 @@
+[workspaces]
+virtualMachine ansible_ssh_host=127.0.0.1
+localhost
+
+[workspaces: vars]
+deployment_dir = /opt
+development_dir = ~
+
+#localhost
+[webservers]
+webview ansible_ssh_port=8000
+
+[dbservers]
+cnx-archive ansible_ssh_port=6543
+cnx-authoring ansible_ssh_port=8080
+cnx-publishing ansible_ssh_port=6544
+accounts ansible_ssh_port=3000
+
+[servers]
+webview
+dbservers
+
+[servers:vars]
+domain_name=dev-vm.cnx.org
+ip_address=10.11.12.13
+

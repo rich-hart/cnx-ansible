@@ -1,0 +1,12 @@
+- name: Install virtualenv
+  pip: name=virtualenv
+- name: create requirements file 
+  copy: src={{local_dir}}/requirements.txt dest=/home/vagrant
+- name: Install python modules
+  pip: requirements=/home/vagrant/requirements.txt chdir=/home/vagrant extra_args='--src /home/vagrant' virtualenv=/home/vagrant/venv
+#  pip: requirements=requirements.txt
+
+#    - include: library/plxslt.yml
+#    - include: library/install_modules.yml
+#    - include: library/test_modules.yml
+

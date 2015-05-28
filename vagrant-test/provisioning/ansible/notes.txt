@@ -1,0 +1,17 @@
+You can use "git+ssh" URI scheme, but you MUST set username:
+pip remote install pip install git+ssh://git@github.com/echweb/echweb-utils.git 
+See git@ part into URI?
+
+PS: Also read about deploy keys.
+
+PPS: In my installation the "git+ssh" URI scheme works only with "editable" requirements:
+
+pip install -e URI#egg=EggName
+
+
+###
+pip install -e git+https://github.com/Connexions/cnx-archive.git#egg=cnxarchive
+
+--src <dir>
+Directory to check out editable projects into. The default in a virtualenv is "<venv path>/src". The default for global installs is "<current dir>/src".
+

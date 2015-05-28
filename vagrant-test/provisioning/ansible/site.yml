@@ -1,7 +1,7 @@
 ---
 - hosts: all
   remote_user: vagrant
-  sudo: yes
+#  sudo: yes
   vars:
     modules:
     - { remote: Connexions, repo: cnx-query-grammar, branch: master }
@@ -11,13 +11,21 @@
     - { remote: Connexions, repo: cnx-archive, branch: master }
     - { remote: Connexions, repo: cnx-publishing, branch: master }
     - { remote: Connexions, repo: cnx-authoring, branch: master }
+    local_dir: /Users/openstax/workspace/cnx-ansible/vagrant-test/provisioning/ansible
+
   handlers:
     - name: restart memcached
       service: name=memcached state=restarted
 
   tasks:
-    - include: library/setup.yml
-#    - include: library/plxslt.yml
+     - include: setup.yml
+#       become: yes
+#       become_method: sudo
+     - include: plxslt.yml
+#       remote_user: vagrant
+#       become: yes
+       become_method: su
+     - include: python_modules.yml
 #    - include: library/install_modules.yml
 #    - include: library/test_modules.yml
 

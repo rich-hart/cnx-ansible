@@ -74,7 +74,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # SHELL
   config.vm.provision "ansible" do |ansible|
         ansible.playbook = "provisioning/ansible/site.yml"
-#        ansible.playbook = "provisioning/ansible/startup.yml"
+#        ansible.playbook = "provisioning/ansible/python_modules.yml"
         ansible.host_key_checking = false
         ansible.sudo = true
   end
