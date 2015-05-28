@@ -16,11 +16,14 @@
      - memcached
 - name: Update all packages to the latest version
   apt: upgrade=dist
-- name: remove requests from pip #authoring resolves intercept error when running tests
-  shell: pip uninstall -y requests
-- name: install requests from apt-get # this can prob be removed 
-  apt: name=python-requests state=present
-
+- name: upgrade pip
+  pip: name=pip extra_args='-U'
+#- name: remove requests from pip #authoring resolves intercept error when running tests
+#  shell: pip uninstall -y requests
+#- name: install requests from apt-get # this can prob be removed 
+#  apt: name=python-requests state=present
+- name: upgrade requests #fixes authoring error  requests >= 2.7.0
+  pip: name=requests extra_args='-U'
 # plxslt
 - name: Clone https://github.com/petere/plxslt.git repo
   git: repo=https://github.com/petere/plxslt.git dest=/home/vagrant/plxslt
@@ -105,6 +108,8 @@
   sudo_user: postgres
 #  shell: cnx-authoring-initialize_db  development.ini chdir=/home/vagrant/cnx-authoring
   shell: cnx-authoring-initialize_db  cnxauthoring/tests/testing.ini chdir=/home/vagrant/cnx-authoring
+
+
 
 # run tests
 - name: run archive tests
