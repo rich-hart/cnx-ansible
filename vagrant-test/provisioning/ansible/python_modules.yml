@@ -17,9 +17,5 @@
   copy: src=/Users/openstax/workspace/cnx-ansible/vagrant-test/provisioning/ansible/requirements.txt dest={{deploy_dir}}
 - name: Install python modules
   pip: requirements=requirements.txt chdir={{deploy_dir}} extra_args='--src {{deploy_dir}}' # virtualenv=/home/vagrant/venv
-#  pip: requirements=requirements.txt
 
-#    - include: library/plxslt.yml
-#    - include: library/install_modules.yml
-#    - include: library/test_modules.yml
 
