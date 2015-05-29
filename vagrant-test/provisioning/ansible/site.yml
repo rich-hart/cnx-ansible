@@ -11,7 +11,7 @@
     - { remote: Connexions, repo: cnx-archive, branch: master }
     - { remote: Connexions, repo: cnx-publishing, branch: master }
     - { remote: Connexions, repo: cnx-authoring, branch: master }
-    deploy_dir: /home/vagrant
+    deploy_dir: /opt #/home/vagrant
   handlers:
     - name: restart memcached
       service: name=memcached state=restarted
