@@ -1,0 +1,8 @@
+#- name: Install virtualenv
+#  pip: name=virtualenv
+- name: create requirements file 
+  copy: src=/Users/openstax/workspace/cnx-ansible/vagrant-test/provisioning/ansible/roles/common/files/requirements.txt dest={{deploy_dir}}
+- name: Install python modules
+  pip: requirements=requirements.txt chdir={{deploy_dir}} extra_args='--src {{deploy_dir}}' # virtualenv=/home/vagrant/venv
+
+

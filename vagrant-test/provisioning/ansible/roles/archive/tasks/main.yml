@@ -1,0 +1,9 @@
+- name: install cnx-archive
+  pip: name='git+https://github.com/Connexions/cnx-archive.git#egg=cnx-archive' version=master extra_args='--src {{deploy_dir}}'
+- name: Set up archive postgres roles
+  sudo: yes
+  sudo_user: postgres
+  postgresql_user: db=postgres name=cnxarchive password=cnxarchive role_attr_flags=SUPERUSER #login_host=default
+- name: restart memcached
+  service: name=memcached state=restarted
+

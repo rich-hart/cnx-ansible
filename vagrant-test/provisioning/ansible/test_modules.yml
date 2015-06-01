@@ -1,11 +1,6 @@
 # test modules
 # change authentication settings.
 # Note: these settings are prob. too lax
-- name: change postgres peer authentication for testing
-  lineinfile: dest=/etc/postgresql/9.3/main/pg_hba.conf regexp="local +all +all +peer"
-              line="local   all             all                                trust"
-- name: restart postgres #should be a handler
-  shell: service postgresql restart
 
 # set roles
 - name: Set up archive postgres roles

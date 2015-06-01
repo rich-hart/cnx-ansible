@@ -1,0 +1,5 @@
+---
+dependencies:
+  - { role: archive }
+  - { role: publishing }
+  - { role: accounts }

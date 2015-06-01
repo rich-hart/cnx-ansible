@@ -1,0 +1,4 @@
+- name: Set up archive postgres roles
+  sudo: yes
+  sudo_user: postgres
+  postgresql_user: db=postgres name=accounts password=accounts role_attr_flags=SUPERUSER #

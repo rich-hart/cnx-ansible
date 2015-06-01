@@ -1,0 +1,6 @@
+#- name: Set up archive postgres roles
+#  sudo: yes
+#  sudo_user: postgres
+#  postgresql_user: db=postgres name=cnxarchive password=cnxarchive role_attr_flags=SUPERUSER #login_host=default
+- name: install cnx-publishing
+  pip: name='git+https://github.com/Connexions/cnx-publishing.git#egg=cnx-publishing' version=master extra_args='--src {{deploy_dir}}'

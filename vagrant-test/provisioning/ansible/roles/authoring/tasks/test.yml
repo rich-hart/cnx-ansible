@@ -1,0 +1,30 @@
+- name: Set up authoring testing database
+  sudo: yes
+  sudo_user: postgres
+  postgresql_db: name=authoring-test owner=cnxauthoring #login_host=default
+- name: Set up accounts testing database
+  sudo: yes
+  sudo_user: postgres
+  postgresql_db: name=accounts-test owner=accounts #login_host=default
+- name: Set up archive testing database
+  sudo: yes
+  sudo_user: postgres
+  postgresql_db: name=cnxarchive-testing owner=cnxarchive #login_host=default
+- name: initialize authoring
+  sudo: yes
+  sudo_user: postgres
+  shell: cnx-authoring-initialize_db  cnxauthoring/tests/testing.ini chdir={{deploy_dir}}/cnx-authoring
+- name: run authoring tests
+  shell: python setup.py test chdir={{deploy_dir}}/cnx-authoring
+- name: drop authoring
+  sudo: yes
+  sudo_user: postgres
+  shell: dropdb authoring-test
+- name: drop authoring
+  sudo: yes
+  sudo_user: postgres
+  shell: dropdb accounts-test
+- name: drop archive
+  sudo: yes
+  sudo_user: postgres
+  shell: dropdb cnxarchive-testing

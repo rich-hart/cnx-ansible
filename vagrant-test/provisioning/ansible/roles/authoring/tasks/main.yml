@@ -1,0 +1,7 @@
+- name: install cnx-authoring
+  pip: name='git+https://github.com/Connexions/cnx-authoring.git#egg=cnx-authoring' version=master extra_args='--src {{deploy_dir}}'
+- name: Set up archive postgres roles
+  sudo: yes
+  sudo_user: postgres
+  postgresql_user: db=postgres name=cnxauthoring password=cnxauthoring role_attr_flags=SUPERUSER #login_host=default
+

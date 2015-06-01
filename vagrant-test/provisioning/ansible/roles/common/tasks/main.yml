@@ -1,0 +1,28 @@
+# setup
+- name: update apt-get
+  apt: update_cache=yes
+- name:  Install packages
+  apt: name={{item}} state=present
+  with_items:
+     - pkg-config
+     - git
+     - libxml2-dev
+     - libxslt-dev 
+     - python-pip
+     - python-dev
+     - postgresql-contrib-9.3
+     - postgresql-plpython-9.3
+     - postgresql-server-dev-9.3
+     - memcached
+- name: Update all packages to the latest version
+  apt: upgrade=dist
+- name: upgrade pip
+  pip: name=pip extra_args='-U'
+- name: upgrade requests 
+  pip: name=requests extra_args='-U'
+- name: change postgres peer authentication for testing
+  lineinfile: dest=/etc/postgresql/9.3/main/pg_hba.conf regexp="local +all +all +peer"
+              line="local   all             all                                trust"
+- name: restart postgres #should be a handler
+  shell: service postgresql restart
+

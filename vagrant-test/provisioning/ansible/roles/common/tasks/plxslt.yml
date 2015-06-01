@@ -1,0 +1,7 @@
+- name: Clone https://github.com/petere/plxslt.git repo
+  git: repo=https://github.com/petere/plxslt.git dest={{deploy_dir}}/plxslt
+- name: Setup plxslt
+  shell:  make chdir={{deploy_dir}}/plxslt
+- name: Install plxslt
+  shell: make install chdir={{deploy_dir}}/plxslt 
+

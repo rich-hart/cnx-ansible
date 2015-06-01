@@ -1,0 +1,12 @@
+- name: Set up archive testing database
+  sudo: yes
+  sudo_user: postgres
+  postgresql_db: name=cnxarchive-testing owner=cnxarchive #login_host=default
+- name: run archive tests
+  shell: python setup.py test chdir={{deploy_dir}}/cnx-archive
+  notify:
+     - restart memcached
+- name: drop archive
+  sudo: yes
+  sudo_user: postgres
+  shell: dropdb cnxarchive-testing

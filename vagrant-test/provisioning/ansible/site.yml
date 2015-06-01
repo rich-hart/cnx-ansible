@@ -17,7 +17,17 @@
       service: name=memcached state=restarted
 
   tasks:
-    - include: setup.yml
-    - include: python_modules.yml
-    - include: test_modules.yml 
+     - include: roles/common/tasks/main.yml
+     - include: roles/common/tasks/plxslt.yml
+     - include: roles/common/tasks/python_modules.yml
+     - include: roles/archive/tasks/main.yml
+     - include: roles/archive/tasks/test.yml
+     - include: roles/publishing/tasks/main.yml
+     - include: roles/publishing/tasks/test.yml
+     - include: roles/accounts/tasks/main.yml
+     - include: roles/authoring/tasks/main.yml
+     - include: roles/authoring/tasks/test.yml
+
+
+   # - include: test_modules.yml 
 
