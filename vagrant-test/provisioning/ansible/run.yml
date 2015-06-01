@@ -1,5 +1,0 @@
-- name: start cnx-archive
-  shell: paster serve development.ini start chdir=/home/vagrant/cnx-archive
-- name: wait for cnx-archive to start
-  shell: sleep 1
-
