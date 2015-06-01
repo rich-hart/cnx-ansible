@@ -3,19 +3,10 @@
   remote_user: vagrant
   sudo: yes
   vars:
-    modules:
-    - { remote: Connexions, repo: cnx-query-grammar, branch: master }
-    - { remote: Connexions, repo: cnx-epub, branch: master }
-    - { remote: Connexions, repo: rhaptos.cnxmlutils, branch: master }
-    - { remote: Connexions, repo: plpydbapi, branch: bug-fixes }
-    - { remote: Connexions, repo: cnx-archive, branch: master }
-    - { remote: Connexions, repo: cnx-publishing, branch: master }
-    - { remote: Connexions, repo: cnx-authoring, branch: master }
     deploy_dir: /opt #/home/vagrant
   handlers:
     - name: restart memcached
       service: name=memcached state=restarted
-
   tasks:
      - include: roles/common/tasks/main.yml
      - include: roles/common/tasks/plxslt.yml
@@ -27,7 +18,4 @@
      - include: roles/accounts/tasks/main.yml
      - include: roles/authoring/tasks/main.yml
      - include: roles/authoring/tasks/test.yml
-
-
-   # - include: test_modules.yml 
 
